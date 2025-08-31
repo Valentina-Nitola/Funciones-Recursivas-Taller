@@ -1,15 +1,18 @@
-package object FuncionesRecursivas {
-  def maxLin(1:List[Int]): Int = {
+package FuncionesRecursivas
 
-  }
-  def maxIt(1:List[Int]): Int = {
+def maxLin(l: List[Int]): Int =
+  if (l.isEmpty) throw new IllegalArgumentException("Lista vacía")
+  else if (l.tail.isEmpty) l.head
+  else
+    val maxTail = maxLin(l.tail)
+    if (l.head > maxTail) l.head else maxTail
 
-  }
-  def movsTorresHanoi(n:Int): BigInt = {
-
-  }
-  def torresHanoi(n:Int, t1:Int, t2:Int, t3:Int): BigInt = {
-    
-  }
-  
-}
+def maxIt(l: List[Int]): Int =
+  if (l.isEmpty) throw new IllegalArgumentException("Lista vacía")
+  else
+    def aux(lista: List[Int], acc: Int): Int =
+      if (lista.isEmpty) acc
+      else
+        val nuevoAcc = if (lista.head > acc) lista.head else acc
+        aux(lista.tail, nuevoAcc)
+    aux(l.tail, l.head)
